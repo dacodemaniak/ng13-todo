@@ -1,55 +1,11 @@
-<h1
-  (click)="changeTitle()"
->
-  {{ title | uppercase }}
-</h1>
+<header>
+  Header of my app
+</header>
 
-<button type="button" 
-  (click)="decrement()"
-  [disabled]="counter===1"
->-</button>{{ counter }}<button type="button" (click)="increment()">+</button>
+<main>
+  <router-outlet></router-outlet>
+</main>
 
-<input [type]="showPassword ? 'text' : 'password'" placeholder="Saisissez votre mot de passe">
-<button type="button" (click)="showPassword = !showPassword">Show password</button>
-
-<!-- Loop over an array with *ngFor-->
-<ul>
-  <li *ngFor="let name of names">
-    {{ name }}
-  </li>
-</ul>
-
-<!-- Loop over an object array -->
-<div class="toolbar">
-  <button type="button" (click)="compare = -1">
-    Past
-  </button>
-  <button type="button" (click)="compare = 1">
-    Today
-  </button>
-  <button type="button" (click)="compare = 2">
-    Future
-  </button>
-  <button type="button" (click)="compare = 0">
-    All
-  </button>
-</div>
-<table>
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>title</th>
-      <th>Issue date</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <ng-container *ngFor="let todo of todos">
-      <tr *ngIf="testDate(todo)">
-        <td>{{ todo.id }}</td>
-        <td>{{ todo.title }}</td>
-        <td>{{ todo.date | date: 'd/MM/Y'}}</td>
-      </tr>
-    </ng-container>
-  </tbody>
-</table>
+<footer>
+  Footer of my app
+</footer>

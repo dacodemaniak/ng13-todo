@@ -1,1 +1,20 @@
-<p>single-todo works!</p>
+<div class="todo-tile">
+    <div class="todo-id">
+         {{ singleTodo.id }}
+    </div>
+    <div class="todo-detail">
+        <div
+            class="todo-title"
+            (click)="showDetail = !showDetail"
+        >{{ singleTodo.title | uppercase }}</div>
+
+        <div
+            class="todo-description"
+            [hidden]="!showDetail"
+        >{{ singleTodo.description }}</div>
+
+        <div class="todo-date">{{ singleTodo.date | date: 'dd/MM/Y' }}</div>
+
+        <button type="button" (click)="removeTodo()">x</button>
+    </div>
+</div>

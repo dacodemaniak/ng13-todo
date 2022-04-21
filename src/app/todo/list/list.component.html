@@ -1,1 +1,11 @@
-<p>list works!</p>
+<ng-container *ngIf="todos.length">
+    <!--
+        [singleTodo] <=> Référence à l'attribut singleToto décoré par @Input()
+        ="todo" todo fait référence à l'objet todo de la liste
+    -->
+    <app-single-todo
+        *ngFor="let todo of todos"
+        [singleTodo]="todo"
+        (onRemove)="removeTodo($event)"
+    ></app-single-todo>
+</ng-container>
