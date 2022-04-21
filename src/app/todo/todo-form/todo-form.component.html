@@ -1,1 +1,22 @@
-<p>todo-form works!</p>
+<form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <input matInput formControlName="title" placeholder="Todo title">
+        <mat-error *ngIf="c['title'].errors">
+            Title field is not fully completed
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput formControlName="description" placeholder="Todo description">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput formControlName="day" placeholder="Day">
+        <input matInput formControlName="month" placeholder="Month">
+        <input matInput formControlName="year" placeholder="Year">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" [disabled]="todoForm.invalid">Add</button>
+</form>
+
+{{ todoForm.value | json }}

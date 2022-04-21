@@ -23,17 +23,12 @@ export class ListComponent implements OnInit, OnDestroy {
 
   public removeTodo(event: TodoModel): void {
     console.log(`Okay, i have to remove ${event.id}`);
-    const index: number = this.todos.findIndex(
-      (todo: TodoModel) => todo.id === event.id
-    );
-    this.todos.splice(index, 1);
 
-    /**
     this.todos.splice(
       this.todos.findIndex((todo: TodoModel) => todo.id === event.id),
       1
     );
-    */
+ 
   }
 
 }

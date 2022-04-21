@@ -16,6 +16,34 @@ export class TodoService {
     return this.todos;
   }
 
+  /**
+   * 
+   * @param todo 
+   * 
+   * @todo Calculate next id
+   */
+  public addTodo(todo: TodoModel): void {
+    // Trouver l'id le plus grand du tableau des todos
+    let highestId: number = -1;
+    for(let i: number = 0; i < this.todos.length; i++) {
+      const todo: TodoModel = this.todos[i];
+      if (todo.id > highestId) {
+        highestId = todo.id;
+      }
+    }
+    highestId = highestId + 1;
+    
+    // Version spécifique language
+    highestId = [... this.todos].sort(
+      (obj1: TodoModel, obj2: TodoModel) => obj2.id - obj1.id
+    )[0].id + 1;
+
+    todo.id = highestId;
+
+    this.todos.push(todo);
+    console.log(`Now, we have ${this.todos.length} todos`);
+  }
+
   private _initialize(): void {
     let todo: TodoModel = new TodoModel();
     todo.id = 1;
