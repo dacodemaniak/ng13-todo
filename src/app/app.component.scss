@@ -1,0 +1,26 @@
+h1 {
+    color: #999;
+}
+
+// button[type="button"]
+button {
+    &[type="button"] {
+        width: 3em;
+        padding:1em;
+        background-color: rgb(37, 245, 127);
+
+        &:disabled {
+            background-color: #999;
+        }
+    }
+}
+
+table {
+    tbody {
+        tr {
+            background-color: aquamarine;
+            height: 2em;
+        }
+    }
+}
+
