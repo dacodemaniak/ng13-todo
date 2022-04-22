@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { TodoModel } from '../models/todo-model';
 
 @Injectable({
@@ -8,8 +9,16 @@ export class TodoService {
 
   private todos: TodoModel[] = [];
 
+  private todosNumber$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
   constructor() {
     this._initialize();
+    this.todosNumber$.next(this.todos.length);
+    console.log(`Next was fired with : ${this.todos.length}`);
+  }
+
+  public getTodosNumber(): Subject<number> {
+    return this.todosNumber$;
   }
 
   public getTodos(): TodoModel[] {
@@ -42,6 +51,8 @@ export class TodoService {
 
     this.todos.push(todo);
     console.log(`Now, we have ${this.todos.length} todos`);
+
+    this.todosNumber$.next(this.todos.length);
   }
 
   private _initialize(): void {

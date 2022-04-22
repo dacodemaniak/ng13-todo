@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TodoModel } from './models/todo-model';
 import { TodoService } from './services/todo.service';
 
@@ -8,7 +8,7 @@ import { TodoService } from './services/todo.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public title = 'todo';
   private oldTitle = '';
 
@@ -22,6 +22,8 @@ export class AppComponent {
 
   public today = new Date();
 
+  public todosNumber: number = 0;
+
   // 0 => all
   // 1 => today
   // 2 => future
@@ -31,6 +33,7 @@ export class AppComponent {
   public constructor(
     private todoService: TodoService
   ) {
+    console.log(`AppComponent constructor`);
     this.counter = 1;
     this.showPassword = false;
 
@@ -42,6 +45,12 @@ export class AppComponent {
     //this.today.setHours(0,0,0,0);
 
     this.todos = [...this.todoService.getTodos()];
+  }
+
+  public ngOnInit(): void {
+    console.log(`AppComponent ngOnInit`);
+    this.todoService.getTodosNumber()
+      .subscribe((todosNumber: number) => this.todosNumber = todosNumber);
   }
 
   public changeTitle(): void {
