@@ -17,12 +17,6 @@
       "title": "Test todo",
       "description": "Une description",
       "date": "2022-05-04T22:00:00.000Z"
-    },
-    {
-      "id": 5,
-      "title": "Truc ",
-      "description": "Desc",
-      "date": "2022-05-04T22:00:00.000Z"
     }
   ]
 }

@@ -20,7 +20,7 @@ export class TodoService {
     private snackBar: MatSnackBar
     ) {
     //this._initialize();
-    this.todosNumber$.next(this.todos.length);
+    
     console.log(`Next was fired with : ${this.todos.length}`);
   }
 
