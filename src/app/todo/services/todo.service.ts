@@ -1,6 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { TodoModel } from '../models/todo-model';
+import { BehaviorSubject, map, Observable, Subject } from 'rxjs';
+import { TodoModel } from '../../models/todo-model';
+import { ITodo } from '../interfaces/i-todo';
+import { environment } from './../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +14,41 @@ export class TodoService {
 
   private todosNumber$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     this._initialize();
     this.todosNumber$.next(this.todos.length);
     console.log(`Next was fired with : ${this.todos.length}`);
+  }
+
+  public all(): Observable<TodoModel[]> {
+    return this.httpClient.get<TodoModel[]>(
+      `${environment.api}/todos` // Endpoint URI
+    )
+    .pipe( // Chain multiple operations to an Observable
+      map((response: any[]) => { // Transform an Observable to another Observable
+        this.todosNumber$.next(response.length);
+        return response.map((data: any) => { // Transform an array to another array
+          const todo: TodoModel = new TodoModel();
+          todo.title = data.title;
+          todo.description = data.description;
+          todo.id = data.id;
+          todo.date = new Date(data.date);
+          return todo;
+        })
+      })
+    );
+  }
+
+  public getAll(): Observable<ITodo[]> {
+    return this.httpClient.get<ITodo[]>(
+      `${environment.api}/todos`
+    );
+  }
+
+  public getDummyAll(): Observable<TodoModel[]> {
+    return this.httpClient.get<TodoModel[]>(
+      `${environment.api}/todos`
+    );
   }
 
   public getTodosNumber(): Subject<number> {

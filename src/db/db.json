@@ -1,22 +1,22 @@
 {
     "todos": [
         {
-            "_id": 1,
-            "_title": "Premier todo",
-            "_description": "Première description",
-            "_date": "2022-04-19T00:00:00"
+            "id": 1,
+            "title": "Premier todo",
+            "description": "Première description",
+            "date": "2022-04-19T00:00:00"
         },
         {
-            "_id": 2,
-            "_title": "Second todo",
-            "_description": "Seconde description",
-            "_date": "2022-04-22T00:00:00"
+            "id": 2,
+            "title": "Second todo",
+            "description": "Seconde description",
+            "date": "2022-04-22T00:00:00"
         },
         {
-            "_id": 3,
-            "_title": "Troisième todo",
-            "_description": "Troisième description",
-            "_date": "2022-04-25T00:00:00"
+            "id": 3,
+            "title": "Troisième todo",
+            "description": "Troisième description",
+            "date": "2022-04-25T00:00:00"
         }
     ]
 }

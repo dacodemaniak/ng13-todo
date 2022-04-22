@@ -9,3 +9,19 @@
         (onRemove)="removeTodo($event)"
     ></app-single-todo>
 </ng-container>
+
+<ng-container *ngIf="iTodos.length">
+    <ul>
+        <li *ngFor="let iTodo of iTodos">
+            {{ iTodo.title }} ({{ iTodo.id }})
+        </li>
+    </ul>
+</ng-container>
+
+<ng-container *ngIf="dummyTodos.length">
+    <ol>
+        <li *ngFor="let dummyTodo of dummyTodos">
+            {{ dummyTodo.title }} ({{ dummyTodo.id }}) - {{ dayPast(dummyTodo) }}
+        </li>
+    </ol>
+</ng-container>

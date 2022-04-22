@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TodoModel } from 'src/app/models/todo-model';
-import { TodoService } from 'src/app/services/todo.service';
+import { TodoService } from 'src/app/todo/services/todo.service';
 
 @Component({
   selector: 'app-todo-form',

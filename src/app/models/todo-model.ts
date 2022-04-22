@@ -1,3 +1,5 @@
+import * as moment from 'moment';
+
 export class TodoModel {
     private _id: number = 0;
     private _title: string = '';
@@ -35,6 +37,17 @@ export class TodoModel {
 
     public get date(): Date {
         return this._date;
+    }
+
+    public dayPast(): number | string {
+        const today: moment.Moment = moment();
+        const todoDate: moment.Moment = moment(this._date);
+
+        if (todoDate.isBefore(today, 'd')) {
+            return today.diff(todoDate, 'd');
+        }
+
+        return 'Todo was not fired yet';
     }
     
 }

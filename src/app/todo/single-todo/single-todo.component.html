@@ -13,7 +13,7 @@
             [hidden]="!showDetail"
         >{{ singleTodo.description }}</div>
 
-        <div class="todo-date">{{ singleTodo.date | date: 'dd/MM/Y' }}</div>
+        <div class="todo-date">{{ singleTodo.date | date: 'dd/MM/Y' }} ({{ singleTodo.dayPast() }})</div>
 
         <button type="button" (click)="removeTodo()">x</button>
     </div>
