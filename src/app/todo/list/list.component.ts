@@ -44,8 +44,6 @@ export class ListComponent implements OnInit, OnDestroy {
       this.todos.findIndex((todo: TodoModel) => todo.id === event.id),
       1
     );
-    // Remove completely data from database using todoService
-    this.todoService.removeTodo(event);
   }
 
   public dayPast(todo: TodoModel): number | string {

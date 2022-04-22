@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TodoModel } from 'src/app/models/todo-model';
+import { TodoService } from '../services/todo.service';
 
 @Component({
   selector: 'app-single-todo',
@@ -12,12 +13,15 @@ export class SingleTodoComponent implements OnInit {
   
   public showDetail = false;
 
-  constructor() { }
+  constructor(
+    private todoService: TodoService
+  ) { }
 
   ngOnInit(): void {}
 
   public removeTodo(): void {
     console.log(`About to remove ${this.singleTodo.id}`);
+    this.todoService.removeTodo(this.singleTodo);
     this.onRemove.emit(this.singleTodo);
   }
 

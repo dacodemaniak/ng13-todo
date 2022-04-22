@@ -11,12 +11,6 @@
       "title": "Second todo",
       "description": "Seconde description",
       "date": "2022-04-22T00:00:00"
-    },
-    {
-      "id": 4,
-      "title": "Test todo",
-      "description": "Une description",
-      "date": "2022-05-04T22:00:00.000Z"
     }
   ]
 }

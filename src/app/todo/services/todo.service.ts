@@ -111,7 +111,11 @@ export class TodoService {
           duration: 2500,
           verticalPosition: 'top'
         }
-      )
+      );
+      this.getAll()
+        .pipe(
+          take(1)
+        ).subscribe((iTodos: ITodo[]) => this.todosNumber$.next(iTodos.length))
     })
   }
 
