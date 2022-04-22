@@ -1,5 +1,17 @@
 <header>
-  Header of my app
+  <nav>
+    <ul>
+      <li>
+        <a [routerLink]="['todo', 'list']">Home</a>
+      </li>
+      <li>
+        <a [routerLink]="['todo', 'add']">Add</a>
+      </li>
+      <li>
+        <a href="/todo/add">Add (with href)</a>
+      </li>
+    </ul>
+  </nav>
 </header>
 
 <main>
