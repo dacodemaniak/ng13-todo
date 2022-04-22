@@ -1,0 +1,22 @@
+{
+    "todos": [
+        {
+            "_id": 1,
+            "_title": "Premier todo",
+            "_description": "Première description",
+            "_date": "2022-04-19T00:00:00"
+        },
+        {
+            "_id": 2,
+            "_title": "Second todo",
+            "_description": "Seconde description",
+            "_date": "2022-04-22T00:00:00"
+        },
+        {
+            "_id": 3,
+            "_title": "Troisième todo",
+            "_description": "Troisième description",
+            "_date": "2022-04-25T00:00:00"
+        }
+    ]
+}
