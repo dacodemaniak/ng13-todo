@@ -41,7 +41,7 @@ export class AppComponent {
 
     //this.today.setHours(0,0,0,0);
 
-    this.todos = this.todoService.getTodos();
+    this.todos = [...this.todoService.getTodos()];
   }
 
   public changeTitle(): void {
