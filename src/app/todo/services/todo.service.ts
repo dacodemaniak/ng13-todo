@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, Subject } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { BehaviorSubject, map, Observable, Subject, take } from 'rxjs';
 import { TodoModel } from '../../models/todo-model';
 import { ITodo } from '../interfaces/i-todo';
 import { environment } from './../../../environments/environment';
@@ -14,8 +15,11 @@ export class TodoService {
 
   private todosNumber$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  constructor(private httpClient: HttpClient) {
-    this._initialize();
+  constructor(
+    private httpClient: HttpClient,
+    private snackBar: MatSnackBar
+    ) {
+    //this._initialize();
     this.todosNumber$.next(this.todos.length);
     console.log(`Next was fired with : ${this.todos.length}`);
   }
@@ -63,30 +67,52 @@ export class TodoService {
    * 
    * @param todo 
    * 
-   * @todo Calculate next id
    */
-  public addTodo(todo: TodoModel): void {
-    // Trouver l'id le plus grand du tableau des todos
-    let highestId: number = -1;
-    for(let i: number = 0; i < this.todos.length; i++) {
-      const todo: TodoModel = this.todos[i];
-      if (todo.id > highestId) {
-        highestId = todo.id;
+  public addTodo(todo: ITodo): void {
+    let todosNumber: number;
+
+    this.getAll()
+      .pipe(
+        take(1),
+        map((iTodos: ITodo[]) => {
+          todosNumber = iTodos.length;
+          return iTodos
+            .sort((iTodo1: ITodo, iTodo2: ITodo) => iTodo2.id - iTodo1.id)[0].id + 1
+        })
+      ).subscribe((nextId: number) => {
+        todo.id = nextId;
+        // Now, we can post the new todo !
+        this.httpClient.post<ITodo>(
+          `${environment.api}/todos`,
+          todo,
+          { observe: 'response'}
+        ).subscribe((response: HttpResponse<any>) => {
+          console.log(`Post returns a ${response.status} http status`);
+          this.todosNumber$.next(todosNumber + 1);
+        })
+      })
+  }
+
+  public removeTodo(todo: TodoModel): void {
+    this.httpClient.delete<TodoModel>(
+      `${environment.api}/todos/${todo.id}`,
+      {
+        observe: 'response'
       }
-    }
-    highestId = highestId + 1;
-    
-    // Version spécifique language
-    highestId = [... this.todos].sort(
-      (obj1: TodoModel, obj2: TodoModel) => obj2.id - obj1.id
-    )[0].id + 1;
-
-    todo.id = highestId;
-
-    this.todos.push(todo);
-    console.log(`Now, we have ${this.todos.length} todos`);
-
-    this.todosNumber$.next(this.todos.length);
+    )
+    .pipe(
+      take(1)
+    )
+    .subscribe((response: HttpResponse<any>) => {
+      this.snackBar.open(
+        'Todo was deleted',
+        'Got It',
+        {
+          duration: 2500,
+          verticalPosition: 'top'
+        }
+      )
+    })
   }
 
   private _initialize(): void {

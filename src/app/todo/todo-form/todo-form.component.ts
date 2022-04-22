@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { TodoModel } from 'src/app/models/todo-model';
 import { TodoService } from 'src/app/todo/services/todo.service';
+import { ITodo } from '../interfaces/i-todo';
 
 @Component({
   selector: 'app-todo-form',
@@ -67,11 +68,18 @@ export class TodoFormComponent implements OnInit {
     // Serialize a real TodoModel Object
     const todoDate: Date = new Date(this.c['year'].value, this.c['month'].value, this.c['day'].value);
 
-    const todo: TodoModel = new TodoModel(); // Instance of TodoModel
+    const todo: ITodo = {
+      id: 0,
+      title: this.c['title'].value,
+      description: this.c['description'].value,
+      date: todoDate
+    };
+
+    /**
     todo.title = this.c['title'].value;
     todo.description = this.c['description'].value;
     todo.date = todoDate;
-
+    */
     console.log(`Todo about to be pushed : ${JSON.stringify(todo)}`);
 
     this.todoService.addTodo(todo);
